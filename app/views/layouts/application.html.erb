@@ -10,7 +10,19 @@
   </head>
 
   <body>
-     <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+
+      <% if user_signed_in? %>
+      <li>
+        <%= link_to "Log_out", destroy_user_session_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "Sign_up", new_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to "Sign_in", new_user_session_path %>
+      </li>
+    <% end %>
     <%= yield %>
   </body>
 </html>
