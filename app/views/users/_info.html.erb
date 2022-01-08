@@ -1,0 +1,33 @@
+<p id="notice"></p>
+<h2>User info</h2>
+<%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+<table class= "table table-striped">
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td><%= user.name %></td>
+    </tr>
+    <tr>
+      <td>introduction</td>
+      <td><%= user.introduction %></td>
+    </tr>
+   <tr>
+     <td>follows</td>
+     <td><%= link_to user.followings.count, user_followings_path(user) %></td>
+   </tr>
+   <tr>
+     <td>followers</td>
+     <td><%= link_to user.followers.count, user_followers_path(user) %></td>
+   </tr>
+  </tbody>
+</table>
+
+<div class='row'>
+  <% if current_user != user %>
+  <td><%= render "relationships/btn", user: user %></td>
+  <% else %>
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  <% end %>
+</div>
